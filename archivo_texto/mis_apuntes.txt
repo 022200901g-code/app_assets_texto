@@ -1,0 +1,3 @@
+hola 
+
+este es el contenido del texto "mis apuntes" para cargar en la aplicacion
