@@ -10,51 +10,63 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'flutter demo',
+    return MaterialApp(
+      title: 'flutter Demo',
       theme: ThemeData( colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true, ),
-      home: const MyHomePage(Title: 'flutter demo home page'),  
+        useMaterial3: true,),
+      home: const MyHomePage(title: 'Flutter demo Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget{
+
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
+
   @override
   State<MyHomePage> createState() => _MyHomePagesState();
 }
 
-class _MyHomePagesState extends State<MyHomePage>{
+class _MyHomePagesState extends State<MyHomePage> {
   String textFromFile = 'vacio';
 
-  getData() async {
-    String response;
-    response = await rootBundle.loadString('archivo_texto/mis_apuntes.txt');
+  Future<void> getData() async {
+    String response = await rootBundle.loadString('archivo_texto/mis_apuntes.txt');
     setState(() {
       textFromFile = response;
     });
   }
-  clear(){
+
+  void clear() {
     setState(() {
       textFromFile = 'Vacio';
     });
   }
+
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(textFromFile, style: Theme.of(context).textTheme.headlineMedium),
-            ElevatedButton(onPressed: () {getData(); }, child: const Text('Get data',),),
-            ElevatedButton(onPressed: () {clear(); }, child: const Text('clear',),),
-
+            ElevatedButton(
+              onPressed: () {
+                getData();
+              },
+              child: const Text('Get data'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                clear();
+              },
+              child: const Text('clear'),
+            ),
           ],
-          ),
-      )        
-    ),
+        ),
+      ),
+    );
   }
 }
